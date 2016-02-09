@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoklakDotNet", "LoklakDotNet\LoklakDotNet.csproj", "{9BE2F54B-0DB4-41F4-A5DF-6AF07B281D13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoklakDotNetTests", "LoklakDotNetTests\LoklakDotNetTests.csproj", "{864CE051-A67A-4224-BFC7-4C2F469F2EBA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9BE2F54B-0DB4-41F4-A5DF-6AF07B281D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BE2F54B-0DB4-41F4-A5DF-6AF07B281D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BE2F54B-0DB4-41F4-A5DF-6AF07B281D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BE2F54B-0DB4-41F4-A5DF-6AF07B281D13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{864CE051-A67A-4224-BFC7-4C2F469F2EBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{864CE051-A67A-4224-BFC7-4C2F469F2EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{864CE051-A67A-4224-BFC7-4C2F469F2EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{864CE051-A67A-4224-BFC7-4C2F469F2EBA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
