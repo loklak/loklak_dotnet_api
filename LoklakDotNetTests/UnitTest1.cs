@@ -71,11 +71,11 @@ namespace LoklakDotNetTests
         public async Task search()
         {
             Loklak loklak = new Loklak();
-            var st = new SearchTerm();
+            var st = new LoklakSearchTerm();
             st.terms = "loklak";
-            st.since = DateTime.Now;
-            st.until = DateTime.Now;
-            st.since.AddMonths(-2);
+            //st.since = DateTime.Now;
+            //st.until = DateTime.Now;
+            //st.since.AddMonths(-2);
             var result = await loklak.search(st);
             var d = JObject.Parse(result);
             Assert.IsNotNull(d.Property("search_metadata"));

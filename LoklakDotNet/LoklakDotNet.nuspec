@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>LoklakDotNet</id>
+    <version>1.0.0.1</version>
+    <title>LoklakDotNet</title>
+    <authors>Aneeshd</authors>
+    <owners>Aneeshd</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>API wrapper for the Loklak server</description>
+    <copyright>Copyright ©  2016</copyright>
+    <dependencies>
+      <dependency id="Microsoft.Net.Http" version="2.2.29" />
+    </dependencies>
+  </metadata>
+</package>

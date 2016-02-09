@@ -87,7 +87,17 @@ namespace LoklakDotNet
             return (await ProcessUrlAsync("user.json", qs));
         }
 
-        public async Task<string> search(SearchTerm q, int count = 100, string source="cache", IList<string> fields = null, int limit=-1, int timeZoneOffset=-1)
+        /// <summary>
+        /// Get a search result from the server
+        /// </summary>
+        /// <param name="q">query term</param>
+        /// <param name="count">the wanted number of results</param>
+        /// <param name="source">the source for the search cache|backend|twitter|all</param>
+        /// <param name="fields">aggregation fields for search facets</param>
+        /// <param name="limit">a limitation of number of facets for each aggregation</param>
+        /// <param name="timeZoneOffset">offset applied on since:, until: and the date histogram</param>
+        /// <returns></returns>
+        public async Task<string> search(LoklakSearchTerm q, int count = 100, string source="cache", IList<string> fields = null, int limit=-1, int timeZoneOffset=-1)
         {
             var qs = "q=" + q.getQueryString() + "&count=" + count.ToString() + "&source=" + source;
             if(fields!= null)
@@ -107,7 +117,10 @@ namespace LoklakDotNet
         }
     }
 
-    public class SearchTerm
+    /// <summary>
+    /// Constructs a search term for the Loklak.search() method
+    /// </summary>
+    public class LoklakSearchTerm
     {
         public string terms = "";
         public string from = "";
