@@ -9,6 +9,19 @@ To install LoklakDotNet, run the following command in the Package Manager Consol
 
 You can also search for `loklak` in the Nuget Package Manager.
 
+###Supported Platforms
+
+
+1. .NET Framework 4.5
+2. ASP.NET Core 5.0
+3. Windows 8/8.1
+4. Windows Universal (UWP)
+5. Windows Phone 8.1
+6. Windows Phone Silverlight 8.1
+7. Xamarin.Android
+8. Xamarin.iOS
+9. Xamarin.iOS (Classic)
+
 ##How to use
 See the LoklakDotNetTests project for usage examples. async/await pattern is followed. All methods output the raw JSON string response. Parse the JSON using a JSON parser of your choice. Examples in LoklakDotNetTests use Newtonsoft.JSON.
 For documentation on the API, go [here](http://loklak.org/api.html).
