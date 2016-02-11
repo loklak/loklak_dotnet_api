@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace LoklakDotNet
@@ -15,6 +16,10 @@ namespace LoklakDotNet
         private async Task<string> ProcessUrlAsync(string method, string parameters)
         {
             var uriString = apiUrl + method;
+            if(method=="markdown.png" || method == "map.png")
+            {
+                uriString = uriString.Replace("api", "vis");
+            }
             if(parameters!=null)
             {
                 uriString += "?" + parameters;
@@ -115,6 +120,31 @@ namespace LoklakDotNet
             System.Diagnostics.Debug.WriteLine(qs);
             return (await ProcessUrlAsync("search.json", qs));
         }
+
+        /// <summary>
+        /// This servlet provides an image with text on it.
+        /// </summary>
+        /// <param name="text">text to be printed, markdown possible</param>
+        /// <param name="color_text">text color</param>
+        /// <param name="color_background">background color</param>
+        /// <param name="padding">space around text</param>
+        /// <param name="uppercase"></param>
+        /// <returns>Image object in string</returns>
+        public async Task<string> markdown(string text, String color_text="", String color_background="", int padding=0, bool uppercase=true)
+        {
+            var qs = "text=" + text + "padding=" + padding.ToString() + "uppercase=" + uppercase;
+            if (!string.IsNullOrWhiteSpace(color_text))
+            {
+                qs += "&color_text=" + color_text;
+            }
+            if (!string.IsNullOrWhiteSpace(color_background))
+            {
+                qs += "&color_background=" + color_background;
+            }
+            System.Diagnostics.Debug.WriteLine(qs);
+            return (await ProcessUrlAsync("markdown.png", qs));
+        }
+
     }
 
     /// <summary>

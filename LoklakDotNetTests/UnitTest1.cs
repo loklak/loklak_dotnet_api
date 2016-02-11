@@ -82,5 +82,14 @@ namespace LoklakDotNetTests
             Assert.IsTrue(((JArray)d.GetValue("statuses")).Count > 0);
 
         }
+
+        [TestMethod]
+        public async Task markdown()
+        {
+            Loklak loklak = new Loklak();
+            var result = await loklak.markdown("hello");
+            Assert.IsNotNull(result);
+
+        }
     }
 }
