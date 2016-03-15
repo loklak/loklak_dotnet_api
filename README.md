@@ -60,7 +60,7 @@ Initializes the Loklak API wrapper
 | ---- | ---- | ----------- |
 | apiUrl | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Optional API Url |
 
-`Loklak loklak = new Loklak();` or `Loklak loklak = new Loklak("http://myloklakapp/api");`
+`Loklak loklak = new Loklak();` or `Loklak loklak = new Loklak("http://myloklakapp/api/");`
 
 
 <a name='M-LoklakDotNet-Loklak-geocode-System-Collections-Generic-IList{System-String}-'></a>
