@@ -54,6 +54,7 @@ namespace LoklakDotNetTests
         }
 
         [Fact]
+        [Trait("Ignore_CI", "user")]
         public async Task user()
         {
             Loklak loklak = new Loklak();
