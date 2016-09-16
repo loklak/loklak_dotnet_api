@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using LoklakDotNet;
 using System.Threading.Tasks;
 using System.Diagnostics;
@@ -9,38 +9,37 @@ using System.Collections.Generic;
 
 namespace LoklakDotNetTests
 {
-    [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
+        [Fact]
         public async Task status()
         {
             Loklak loklak = new Loklak();
             var result = await loklak.status();
             var d = JObject.Parse(result);
-            Assert.IsNotNull(d.Property("system"));
+            Assert.NotNull(d.Property("system"));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task hello()
         {
             Loklak loklak = new Loklak();
             var result = await loklak.hello();
             var d = JObject.Parse(result);
-            Assert.IsNotNull(d.Property("status"));
+            Assert.NotNull(d.Property("status"));
         }
 
-        [TestMethod]
+        [Fact]
         public async Task peers()
         {
             Loklak loklak = new Loklak();
             var result = await loklak.peers();
             var d = JObject.Parse(result);
-            Assert.IsNotNull(d.Property("peers"));
-            Assert.IsTrue(((JArray)d.GetValue("peers")).Count >= 0);
+            Assert.NotNull(d.Property("peers"));
+            Assert.True(((JArray)d.GetValue("peers")).Count >= 0);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task geocode()
         {
             Loklak loklak = new Loklak();
@@ -49,25 +48,26 @@ namespace LoklakDotNetTests
             p.Add("Berlin");
             var result = await loklak.geocode(p);
             var d = JObject.Parse(result);
-            Assert.IsNotNull(d.Property("locations"));
-            Assert.AreEqual(((JObject)(((JObject)d.GetValue("locations")).GetValue("Delhi"))).GetValue("country_code").ToString(),"IN");
-            Assert.AreEqual(((JObject)(((JObject)d.GetValue("locations")).GetValue("Berlin"))).GetValue("country_code").ToString(), "DE");
+            Assert.NotNull(d.Property("locations"));
+            Assert.Equal(((JObject)(((JObject)d.GetValue("locations")).GetValue("Delhi"))).GetValue("country_code").ToString(),"IN");
+            Assert.Equal(((JObject)(((JObject)d.GetValue("locations")).GetValue("Berlin"))).GetValue("country_code").ToString(), "DE");
         }
 
-        [TestMethod]
+        [Fact]
+        [Trait("Ignore_CI", "user")]
         public async Task user()
         {
             Loklak loklak = new Loklak();
             var result = await loklak.user("loklak_app", 5, 5);
             var d = JObject.Parse(result);
-            Assert.IsNotNull(d.Property("user"));
-            Assert.AreEqual(((JObject)(((JObject)d.GetValue("user")))).GetValue("id").ToString(), "3090229939");
-            Assert.IsNotNull(d.Property("topology"));
-            Assert.IsTrue(((JArray)(((JObject)(d.GetValue("topology"))).GetValue("following"))).Count >= 5);
-            Assert.IsTrue(((JArray)(((JObject)(d.GetValue("topology"))).GetValue("followers"))).Count >= 5);
+            Assert.NotNull(d.Property("user"));
+            Assert.Equal(((JObject)(((JObject)d.GetValue("user")))).GetValue("id").ToString(), "3090229939");
+            Assert.NotNull(d.Property("topology"));
+            Assert.True(((JArray)(((JObject)(d.GetValue("topology"))).GetValue("following"))).Count >= 5);
+            Assert.True(((JArray)(((JObject)(d.GetValue("topology"))).GetValue("followers"))).Count >= 5);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task search()
         {
             Loklak loklak = new Loklak();
@@ -78,17 +78,17 @@ namespace LoklakDotNetTests
             //st.since.AddMonths(-2);
             var result = await loklak.search(st);
             var d = JObject.Parse(result);
-            Assert.IsNotNull(d.Property("search_metadata"));
-            Assert.IsTrue(((JArray)d.GetValue("statuses")).Count > 0);
+            Assert.NotNull(d.Property("search_metadata"));
+            Assert.True(((JArray)d.GetValue("statuses")).Count > 0);
 
         }
 
-        [TestMethod]
+        [Fact]
         public async Task markdown()
         {
             Loklak loklak = new Loklak();
             var result = await loklak.markdown("hello");
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
 
         }
     }
