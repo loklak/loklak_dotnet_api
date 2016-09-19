@@ -1,4 +1,6 @@
-﻿# LoklakDotNet
+# LoklakDotNet
+
+[![Build Status](https://travis-ci.org/loklak/loklak_dotnet_wrapper.svg?branch=master)](https://travis-ci.org/loklak/loklak_dotnet_wrapper)
 
 This is the .NET API wrapper for the Loklak server (http://loklak.org).
 
