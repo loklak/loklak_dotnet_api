@@ -13,19 +13,20 @@ namespace LoklakDotNet
         private string apiUrl;
         private HttpClient client;
 
-        private async Task<string> ProcessUrlAsync(string method, string parameters)
+        private async Task<string> ProcessUrlAsync(string method, Dictionary<string,string> parameters=null)
         {
             var uriString = apiUrl + method;
             if(method=="markdown.png" || method == "map.png")
             {
                 uriString = uriString.Replace("api", "vis");
             }
-            if(parameters!=null)
+            UriBuilder uri = new UriBuilder(uriString);
+            if(!object.ReferenceEquals(null, parameters) && parameters.Count!=0)
             {
-                uriString += "?" + parameters;
+                uri.Query = new FormUrlEncodedContent(parameters).ReadAsStringAsync().Result;
             }
-            
-            var result = await client.GetStringAsync(new Uri(uriString, UriKind.Absolute));
+            System.Diagnostics.Debug.WriteLine(uri.Uri.AbsoluteUri);
+            var result = await client.GetStringAsync(uri.Uri.AbsoluteUri);
             System.Diagnostics.Debug.WriteLine(result);
             return result;
         }
@@ -46,7 +47,7 @@ namespace LoklakDotNet
         /// <returns></returns>
         public async Task<string> status()
         {
-            return (await ProcessUrlAsync("status.json", null));
+            return (await ProcessUrlAsync("status.json"));
         }
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace LoklakDotNet
         /// <returns>{"status":"ok"}</returns>
         public async Task<string> hello()
         {
-            return (await ProcessUrlAsync("hello.json", null));
+            return (await ProcessUrlAsync("hello.json"));
         }
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace LoklakDotNet
         /// <returns></returns>
         public async Task<string> peers()
         {
-            return (await ProcessUrlAsync("peers.json", null));
+            return (await ProcessUrlAsync("peers.json"));
         }
 
         /// <summary>
@@ -74,7 +75,8 @@ namespace LoklakDotNet
         /// <returns></returns>
         public async Task<string> geocode(IList<string> places)
         {
-            var qs = "places=" + string.Join(",", places);
+            Dictionary<string,string> qs = new Dictionary<string,string>();
+            qs.Add("places", string.Join(",", places));
             return (await ProcessUrlAsync("geocode.json", qs));
         }
 
@@ -87,8 +89,10 @@ namespace LoklakDotNet
         /// <returns></returns>
         public async Task<string> user(string screen_name, int follower_count=0, int following_count=0)
         {
-            var qs = "screen_name=" + screen_name + "&followers=" + follower_count.ToString() + "&following=" + following_count.ToString();
-            System.Diagnostics.Debug.WriteLine(qs);
+            Dictionary<string,string> qs = new Dictionary<string,string>();
+            qs.Add("screen_name", screen_name);
+            qs.Add("followers", follower_count.ToString());
+            qs.Add("following", following_count.ToString());
             return (await ProcessUrlAsync("user.json", qs));
         }
 
@@ -104,20 +108,22 @@ namespace LoklakDotNet
         /// <returns></returns>
         public async Task<string> search(LoklakSearchTerm q, int count = 100, string source="cache", IList<string> fields = null, int limit=-1, int timeZoneOffset=-1)
         {
-            var qs = "q=" + q.getQueryString() + "&count=" + count.ToString() + "&source=" + source;
+            Dictionary<string,string> qs = new Dictionary<string,string>();
+            qs.Add("q", q.getQueryString());
+            qs.Add("count", count.ToString());
+            qs.Add("source", source);
             if(fields!= null)
             {
-                qs += "&fields=" + string.Join(",", fields);
+                qs.Add("fields", string.Join(",", fields));
             }
             if(limit!=-1)
             {
-                qs += "&limit=" + limit;
+                qs.Add("limit", limit.ToString());
             }
             if(timeZoneOffset!=-1)
             {
-                qs += "&timeZoneOffset=" + timeZoneOffset;
+                qs.Add("timeZoneOffset", timeZoneOffset.ToString());
             }
-            System.Diagnostics.Debug.WriteLine(qs);
             return (await ProcessUrlAsync("search.json", qs));
         }
 
@@ -132,16 +138,18 @@ namespace LoklakDotNet
         /// <returns>Image object in string</returns>
         public async Task<string> markdown(string text, String color_text="", String color_background="", int padding=0, bool uppercase=true)
         {
-            var qs = "text=" + text + "padding=" + padding.ToString() + "uppercase=" + uppercase;
+            Dictionary<string,string> qs = new Dictionary<string,string>();
+            qs.Add("text", text);
+            qs.Add("padding", padding.ToString());
+            qs.Add("uppercase", uppercase ? "1" : "0");
             if (!string.IsNullOrWhiteSpace(color_text))
             {
-                qs += "&color_text=" + color_text;
+                qs.Add("color_text", color_text);
             }
             if (!string.IsNullOrWhiteSpace(color_background))
             {
-                qs += "&color_background=" + color_background;
+                qs.Add("color_background", color_background);
             }
-            System.Diagnostics.Debug.WriteLine(qs);
             return (await ProcessUrlAsync("markdown.png", qs));
         }
 
