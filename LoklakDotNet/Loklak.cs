@@ -35,7 +35,7 @@ namespace LoklakDotNet
         /// Initializes the Loklak API wrapper
         /// </summary>
         /// <param name="apiUrl">Optional API Url</param>
-        public Loklak(String apiUrl = "http://loklak.org/api/")
+        public Loklak(String apiUrl = "http://api.loklak.org/api/")
         {
             this.apiUrl = apiUrl;
             client = new HttpClient();
